@@ -49,7 +49,7 @@ public class JackpotBetController {
         final JackpotContribution jackpotContribution = jackpotContributionService.findById(jackpotContributionId);
         final Double reward = jackpotBetThreadService.getExecutorServiceByJackpotId(jackpotContribution.getJackpot().getId())
                 .submit(
-                        () -> jackpotManagingService.evaluateContributingBetForReward(jackpotContribution)
+                        () -> jackpotManagingService.evaluateContributingBetForReward(jackpotContributionService.findById(jackpotContributionId))
                 ).get();
 
         return new RewardResponse(reward);
